@@ -14,6 +14,10 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpForce;
     private bool canJump;
 
+    private float transformSize = 0.15f;
+
+    [SerializeField] private Animator animator;
+
 
     private void Awake()
     {
@@ -23,12 +27,14 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         Flip();
+        SetAnimations();
     } //END Update()
 
 
     private void FixedUpdate()
     {
         Walk();
+        
     } //END FixedUpdate()
 
 
@@ -84,15 +90,19 @@ public class PlayerMovement : MonoBehaviour
     /// <summary>
     /// Flips player sprite based on whether it is moving left or right
     /// </summary>
-    private void Flip() //Sprites in, not working properly
+    private void Flip()
     {
         if (horizontal < 0) //Left
         {
-            transform.localScale = new Vector3(-transform.localScale.x, transform.localScale.y, 1);
+            Debug.Log("Left");
+            transform.localScale = new Vector3(-transformSize, transformSize, 1);
+            //transform.localScale = new Vector3(-1, 1, 1);
         }
         else if (horizontal > 0) //Right
         {
-            transform.localScale = new Vector3(transform.localScale.x, transform.localScale.y, 1);
+            Debug.Log("Right");
+            transform.localScale = new Vector3(transformSize, transformSize, 1);
+           //transform.localScale = new Vector3(1, 1, 1);
         }
     } //END Flip()
 
@@ -107,4 +117,21 @@ public class PlayerMovement : MonoBehaviour
         }
         
     } //END Jump()
+
+
+    void SetAnimations()
+    {
+        //Walk animations
+        animator.SetFloat("Walk", horizontal);
+
+        //Jump animation, not working
+        if(!canJump)
+        {
+            animator.SetBool("Jump", true);
+        }
+        else if(canJump)
+        {
+            animator.SetBool("Jump", false);
+        }
+    }
 } //END PlayerMovement.cs

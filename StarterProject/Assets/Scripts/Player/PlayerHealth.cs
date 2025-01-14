@@ -9,6 +9,8 @@ public class PlayerHealth : MonoBehaviour
     public int health = 3;
     [SerializeField] private Image[] healthImages;
 
+    [SerializeField] private ParticleSystem healthParticles;
+
     private void Start()
     {
         gameManager = FindObjectOfType<GameManager>();
@@ -27,8 +29,8 @@ public class PlayerHealth : MonoBehaviour
     {
         if (_collision.gameObject.GetComponent<TimeEnemyAttacks>() != null)
         {
-            health--;           
-
+            health--;
+            healthParticles.Play();
             healthImages[health].gameObject.SetActive(false);
 
             //If player is out of health
@@ -49,5 +51,8 @@ public class PlayerHealth : MonoBehaviour
         gameManager.LoadEnd();
         //game over
     } //END Die()
+
+
+
 
 } //END PlayerHealth.cs
