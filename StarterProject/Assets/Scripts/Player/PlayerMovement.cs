@@ -17,7 +17,8 @@ public class PlayerMovement : MonoBehaviour
     private float transformSize = 0.15f;
 
     [SerializeField] private Animator animator;
-
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip jumpSFX;
 
     private void Awake()
     {
@@ -114,6 +115,8 @@ public class PlayerMovement : MonoBehaviour
         if (canJump)
         {
             rb.velocity = new Vector2(rb.velocity.x, jumpForce);
+            audioSource.clip = jumpSFX;
+            audioSource.Play();
         }
         
     } //END Jump()

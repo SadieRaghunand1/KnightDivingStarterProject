@@ -5,6 +5,7 @@ using UnityEngine;
 public class WinGame : MonoBehaviour
 {
     private GameManager gameManager;
+    [SerializeField] AudioSource audioSource;
 
     private void Start()
     {
@@ -14,7 +15,9 @@ public class WinGame : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        audioSource.Play();
         EndGameWin(collision);
+       
     } //END OnCollisionEnter2D()
 
 

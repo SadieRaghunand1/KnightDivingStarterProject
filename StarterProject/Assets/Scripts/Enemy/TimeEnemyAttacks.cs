@@ -15,7 +15,7 @@ public class TimeEnemyAttacks : MonoBehaviour
     bool moveBack;
 
     [SerializeField] private Transform ogPos;
-
+    [SerializeField] private AudioSource audioSource;
 
     void Start()
     {
@@ -38,6 +38,7 @@ public class TimeEnemyAttacks : MonoBehaviour
         rb.velocity = new Vector2(0, 0);
         moveForward = true;
         moveBack = false;
+        audioSource.Play();
         StartCoroutine(TimeRetreat());
     } //END TimeAttack()
 

@@ -6,16 +6,19 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public bool win;
+    private AudioSource audioSource;
 
 
     // Start is called before the first frame update
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void LoadInstructions()
     {
+        PlayClickSFX();
         SceneManager.LoadScene(1);
         StartCoroutine(WaitToUnloadInstructions());
     }
@@ -28,6 +31,13 @@ public class GameManager : MonoBehaviour
     public void LoadEnd()
     {
         SceneManager.LoadScene(3);
+        StartCoroutine (WaitToUnloadEnd());
+    }
+
+    public void LoadMainMenu()
+    {
+        PlayClickSFX();
+        SceneManager.LoadScene(0);
     }
 
 
@@ -35,6 +45,17 @@ public class GameManager : MonoBehaviour
     {
         yield return new WaitForSeconds(2);
         LoadGame();
+    }
+
+    IEnumerator WaitToUnloadEnd()
+    {
+        yield return new WaitForSeconds(2);
+        LoadMainMenu();
+    }
+
+    public void PlayClickSFX()
+    {
+        audioSource.Play();
     }
    
 } //END GameManager.cs

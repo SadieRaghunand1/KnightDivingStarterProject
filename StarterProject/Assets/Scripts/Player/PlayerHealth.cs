@@ -10,6 +10,8 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private Image[] healthImages;
 
     [SerializeField] private ParticleSystem healthParticles;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip hitSFX;
 
     private void Start()
     {
@@ -32,6 +34,9 @@ public class PlayerHealth : MonoBehaviour
             health--;
             healthParticles.Play();
             healthImages[health].gameObject.SetActive(false);
+
+            audioSource.clip = hitSFX;
+            audioSource.Play();
 
             //If player is out of health
             if (health <= 0) 
