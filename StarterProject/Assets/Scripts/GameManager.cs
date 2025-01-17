@@ -57,5 +57,12 @@ public class GameManager : MonoBehaviour
     {
         audioSource.Play();
     }
+
+    public void QuitGame()
+    {
+        PlayClickSFX();
+        Application.Quit();
+    }
+
    
 } //END GameManager.cs
